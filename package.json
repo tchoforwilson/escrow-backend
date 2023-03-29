@@ -4,7 +4,9 @@
   "description": "Escrow application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev":"nodemon server.js",
+    "start":"node server.js",
+    "start:prod":"NODE_ENV=production nodemon server.js"
   },
   "author": "Lac-Doh-Wilson Tchofor",
   "license": "ISC",
