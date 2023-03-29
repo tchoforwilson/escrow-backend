@@ -2,7 +2,8 @@
   "name": "escrow-app",
   "version": "1.0.0",
   "description": "Escrow application",
-  "main": "index.js",
+  "main": "server.js",
+  "type":"module",
   "scripts": {
     "dev":"nodemon server.js",
     "start":"node server.js",
