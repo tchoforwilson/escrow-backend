@@ -27,6 +27,7 @@ const userSchema = Schema({
     minLength: 8,
     select: false,
   },
+  photo: String,
   passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password'],
