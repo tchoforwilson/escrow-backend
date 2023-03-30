@@ -18,6 +18,10 @@ const transactionSchema = new Schema({
     required: [true, 'Please provide inspection days for transaction'],
   },
   item: {
+    name: {
+      type: String,
+      required: [true, 'Please provide item name'],
+    },
     category: {
       type: String,
       required: [true, 'Item must belong to a category'],
