@@ -10,7 +10,6 @@ router
   .route('/')
   .get(transactionController.getAllTransactions)
   .post(
-    authController.restrictTo('user'),
     transactionController.setUserTransactionId,
     transactionController.createTransaction
   );
@@ -18,13 +17,7 @@ router
 router
   .route('/:id')
   .get(transactionController.getTransaction)
-  .patch(
-    authController.restrictTo('user'),
-    transactionController.updateTransaction
-  )
-  .delete(
-    authController.restrictTo('user', 'admin'),
-    transactionController.deleteTransaction
-  );
+  .patch(transactionController.updateTransaction)
+  .delete(transactionController.deleteTransaction);
 
 export default router;
