@@ -119,7 +119,6 @@ const protect = catchAsync(async (req, res, next) => {
  */
 const restrictTo = (...roles) => {
   return (req, res, next) => {
-    console.log(roles);
     // roles ['admin', 'user']. role='user'
     if (!roles.includes(req.user.role)) {
       return next(
