@@ -2,6 +2,8 @@ import express, { json, urlencoded } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 
 import globalErrorHandler from './controllers/errorController.js';
@@ -15,6 +17,10 @@ config({ path: './config.env' });
 const app = express();
 
 // GLOBAL MIDDLEWARES
+// Serving static files
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
 // Set security HTTP headers
 app.use(helmet());
 
