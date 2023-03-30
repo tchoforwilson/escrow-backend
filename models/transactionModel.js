@@ -44,6 +44,10 @@ const transactionSchema = new Schema({
     required: [true, 'Please provide transaction currency'],
     enum: ['XAF', 'CAD', 'USD', 'Euro', 'Niara', 'Rand'],
   },
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User',
