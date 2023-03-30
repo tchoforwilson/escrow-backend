@@ -10,4 +10,4 @@ The main actors in this application is the user and his/her transactions
 
 # Transaction
  1. Transaction has item (name, price,category, description), title, currency, user role (buyer/seller), date and inspection days
- 2. A transaction is made by the user
+ 2. A transaction is made by the user whose role can either be a seller or buyer
