@@ -5,12 +5,12 @@ import catchAsync from './../utilities/catchAsync.js';
 import User from './../models/userModel.js';
 
 /**
- * @brief Generate sign token from user id
- * @param {String} id
+ * @brief Generate sign token from user
+ * @param {Object} user -> User object data
  * @returns Object
  */
-const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+const signToken = (user) => {
+  return jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
@@ -22,7 +22,7 @@ const signToken = (id) => {
  * @param {*} res
  */
 const createSendToken = (user, statusCode, req, res) => {
-  const token = signToken(user._id);
+  const token = signToken(user);
 
   res.cookie('jwt', token, {
     expires: new Date(
@@ -95,7 +95,7 @@ const protect = catchAsync(async (req, res, next) => {
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   // 3) Check if user still exists
-  const currentUser = await User.findById(decoded.id);
+  const currentUser = await User.findById(decoded.user._id);
   if (!currentUser) {
     return next(new AppError('Sorry! user no longer exist.', 401));
   }
