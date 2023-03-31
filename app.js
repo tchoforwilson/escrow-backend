@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 
@@ -33,6 +34,12 @@ if (process.env.NODE_ENV === 'development') {
 app.use(json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+
+app.use(cors(corsOptions));
 
 // ROUTES
 app.use('/api/v1/users', userRouter);
