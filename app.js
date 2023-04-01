@@ -23,7 +23,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP headers
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: false }));
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -36,7 +36,7 @@ app.use(urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: 'http://localhost:3000',
 };
 
 app.use(cors(corsOptions));
