@@ -1,4 +1,3 @@
-import { Collection } from 'mongoose';
 import APIFeatures from '../utilities/apiFeatures.js';
 import AppError from '../utilities/appError.js';
 import catchAsync from '../utilities/catchAsync.js';
