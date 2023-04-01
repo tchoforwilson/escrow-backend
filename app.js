@@ -35,8 +35,12 @@ app.use(json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
+let origin = process.env.REMOTE_URL_DEV;
+if (process.env.NODE_ENV === 'production') {
+  origin = process.env.REMOTE_URL_PROD;
+}
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin,
 };
 
 app.use(cors(corsOptions));

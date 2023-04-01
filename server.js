@@ -13,9 +13,12 @@ import app from './app.js';
 
 // Connect to database
 let DATABASE = process.env.DATABASE_LOCAL;
-if (process.env.NODE_ENV === 'production') DATABASE = process.env.DATABASE_HOST;
-if (process.env.NODE_ENV === 'test') DATABASE = process.env.DATABASE_TEST;
-
+if (process.env.NODE_ENV === 'production') {
+  DATABASE = process.env.DATABASE_HOST.replace(
+    '<PASSWORD>',
+    process.env.DATABASE_PASSWORD
+  );
+}
 mongoose
   .connect(DATABASE, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -25,7 +28,7 @@ mongoose
     console.log('Unable to connect to database:💥 ', err.message);
   });
 // Launch server
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}....`);
 });
