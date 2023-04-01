@@ -11,6 +11,7 @@ const getTransaction = factory.getOne(Transaction);
 const getAllTransactions = factory.getAll(Transaction);
 const updateTransaction = factory.updateOne(Transaction);
 const deleteTransaction = factory.deleteOne(Transaction);
+const countTransactions = factory.getCount(Transaction);
 
 export default {
   setUserTransactionId,
@@ -19,4 +20,5 @@ export default {
   getAllTransactions,
   updateTransaction,
   deleteTransaction,
+  countTransactions,
 };
