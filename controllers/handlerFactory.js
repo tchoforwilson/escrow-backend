@@ -1,3 +1,4 @@
+import { Collection } from 'mongoose';
 import APIFeatures from '../utilities/apiFeatures.js';
 import AppError from '../utilities/appError.js';
 import catchAsync from '../utilities/catchAsync.js';
@@ -88,7 +89,7 @@ const getAll = (Model) =>
       status: 'success',
       results: doc.length,
       data: {
-        data: doc,
+        doc,
       },
     });
   });
@@ -112,10 +113,24 @@ const deleteOne = (Model) =>
     });
   });
 
+/**
+ * @breif Count the number of documents in a collection
+ * @param {Collection} Model -> Collection to count
+ */
+const getCount = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const count = await Model.find(req.body).count();
+    res.status(201).json({
+      status: 'success',
+      data: count,
+    });
+  });
+
 export default {
   createOne,
   getOne,
   getAll,
   updateOne,
   deleteOne,
+  getCount,
 };
