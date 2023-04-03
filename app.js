@@ -35,15 +35,16 @@ app.use(json({ limit: '10kb' }));
 app.use(urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
-let origin = process.env.REMOTE_URL_DEV;
+let originUrl = process.env.REMOTE_URL_DEV;
 if (process.env.NODE_ENV === 'production') {
   origin = process.env.REMOTE_URL_PROD;
 }
+//console.log(originUrl);
 const corsOptions = {
-  origin,
+  origin: 'http://127.0.0.1:3000',
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // ROUTES
 app.use('/api/v1/users', userRouter);
