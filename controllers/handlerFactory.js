@@ -74,6 +74,10 @@ const getAll = (Model) =>
     let filter = {};
     if (req.params.userId) filter = { user: req.params.userId };
 
+    // Search regex for transaction title
+    if (req.query.title) {
+      req.query['title'] = { $regex: req.query.title };
+    }
     // EXECUTE THE QUERY
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
@@ -118,8 +122,9 @@ const deleteOne = (Model) =>
  */
 const getCount = (Model) =>
   catchAsync(async (req, res, next) => {
-    const count = await Model.find(req.body).count();
-    res.status(201).json({
+    const filter = Object.assign(req.body, req.query);
+    const count = await Model.countDocuments(filter);
+    res.status(200).json({
       status: 'success',
       data: count,
     });
