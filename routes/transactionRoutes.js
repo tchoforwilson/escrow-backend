@@ -6,7 +6,11 @@ const router = Router({ mergeParams: true });
 
 router.use(authController.protect);
 
-router.get('/count', transactionController.countTransactions);
+router.get(
+  '/count',
+  transactionController.setUserTransactionId,
+  transactionController.countTransactions
+);
 
 router
   .route('/')
